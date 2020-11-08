@@ -1,4 +1,6 @@
-/* ----- Fetching the API ----- */
+/*------------------------------*/
+/*       Fetching the API       */
+/*------------------------------*/
 
 async function getBeerData() {
     // Declaring and getting the API
@@ -7,7 +9,9 @@ async function getBeerData() {
     return response
 };
 
-/* ----- Functions ----- */
+/*-----------------------*/
+/*       Functions       */
+/*-----------------------*/
 
 // function getMalt(malt) {
 //     let maltInfo = ""
@@ -39,17 +43,19 @@ function getIngredients(ingredients) {
 
     return ingredientsInfo
 }
-
-/* ----- Random Beer On Load ----- */
+/*---------------------------------*/
+/*       Random Beer On Load       */
+/*---------------------------------*/
 
 getBeerData().then(beers => {
     // Randomizing beers and putting it inside a variable
     const randomBeer = beers[Math.floor(Math.random() * beers.length)]
 
-    // Display the fetched random beer info
+    // Display the fetched random beer on page load
     document.querySelector(".image-bord").src = randomBeer.image_url
     document.querySelector("h2").innerText = randomBeer.name
 
+    // Display the fetched random beer info on modal
     document.querySelector(".title").innerText = randomBeer.name
 
     document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<h4>Description</h4>"
@@ -76,7 +82,26 @@ getBeerData().then(beers => {
     // document.querySelector(".modal-image").src = randomBeer.image_url
 })
 
-/* ----- Modal ----- */
+/*--------------------*/
+/*       Navbar       */
+/*--------------------*/
+
+function openNav() {
+    document.querySelector(".sidenav").style.width = "250px";
+    document.querySelector(".nav").style.marginLeft = "250px";
+}
+
+function closeNav() {
+    document.querySelector(".sidenav").style.width = "0";
+    document.querySelector(".nav").style.marginLeft = "0";
+}
+
+document.querySelector(".nav").addEventListener('click', openNav)
+document.querySelector(".closebtn").addEventListener('click', closeNav)
+
+/*--------------------*/
+/*        Modal       */
+/*--------------------*/
 
 const openModalButtons = document.querySelectorAll('[data-modal-target]')
 const closeModalButtons = document.querySelectorAll('[data-close-button]')
@@ -114,5 +139,3 @@ function closeModal(modal) {
     modal.classList.remove('active')
     overlay.classList.remove('active')
 }
-
-/* -----  ----- */
