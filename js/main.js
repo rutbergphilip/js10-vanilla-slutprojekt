@@ -4,7 +4,7 @@
 
 async function getBeerData() {
     // Declaring and getting the API
-    const request = await fetch('https://api.punkapi.com/v2/beers')
+    const request = await fetch('https://api.punkapi.com/v2/beers/random')
     const response = await request.json()
     return response
 };
@@ -23,16 +23,6 @@ async function getBeerData() {
 //     return maltInfo
 // }
 
-// function getHops(hops) {
-//     let hopsInfo = ""
-
-//     hops.forEach(h => {
-//         hopsInfo += `${h.name} ${h.amount.value} ${h.amount.unit}\n`
-//     })
-
-//     return hopsInfo
-// }
-
 // Function to format and get the ingredients information
 function getIngredients(ingredients) {
     let ingredientsInfo = ""
@@ -49,7 +39,7 @@ function getIngredients(ingredients) {
 
 getBeerData().then(beers => {
     // Randomizing beers and putting it inside a variable
-    const randomBeer = beers[Math.floor(Math.random() * beers.length)]
+    const randomBeer = beers[0]
 
     // Display the fetched random beer on page load
     document.querySelector(".image-bord").src = randomBeer.image_url
