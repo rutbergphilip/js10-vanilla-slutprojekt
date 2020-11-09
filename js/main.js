@@ -114,12 +114,33 @@ document.querySelector(".closebtn").addEventListener('click', closeNav)
 
 const links = document.querySelectorAll(".sidenav > a")
 
+const link = document.querySelector("a[data-tab]")
+const tab = link.getAttribute("data-tab")
+const section = document.querySelector("." + tab)
+
+const activeClass = document.querySelectorAll("main > section")
+
 for (let link of links) {
     link.addEventListener('click', () => {
-        const wrapHome = document.querySelector(".wrap-home")
-        console.log(wrapHome)
+        document.querySelectorAll("main > section").forEach(section => {
+            console.log(section)
+        })
     })
 }
+
+// const activeclass = document.querySelectorAll('main > section');
+
+// for (let i = 0; i < activeclass.length; i++) {
+//     activeclass[i].addEventListener('click', activateClass);
+// }
+
+// function activateClass(e) {
+//     for (let i = 0; i < activeclass.length; i++) {
+//         activeclass[i].classList.remove('active');
+//     }
+//     e.target.classList.add('active');
+// }
+
 // "." + link.innerText.split(" ").join("").toLowerCase()
 /*--------------------*/
 /*        Modal       */

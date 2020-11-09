@@ -88,6 +88,10 @@
     grid-template-rows: repeat(10, 10%);
 }
 
+.wrap-search {
+    display: none;
+}
+
 .container {
     grid-column: 3;
     grid-row: 2/10;
