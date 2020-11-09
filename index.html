@@ -64,46 +64,51 @@
 
         <section class="wrap-search">
 
-            <div class="sidenav">
-                <a href="javascript:void(0)" class="closebtn">&times;</a>
-                <a href="#">Beer Wiki</a>
-                <a href="#">Search Page</a>
+             <div class="sidenav">
+            <a href="javascript:void(0)" class="closebtn">&times;</a>
+             <a href="#" data-tab="beer-wiki">Beer Wiki</a>
+                <a href="#" data-tab="search-page">Search Page</a>
+        </div>
+
+        <nav>
+            <span style="font-size:30px;cursor:pointer">&#9776;</span>
+        </nav>
+
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <div class="title"></div>
+                <button data-close-button class="close-button">&times;</button>
             </div>
 
-            <div class="nav">
-                <span style="font-size:30px;cursor:pointer">&#9776;</span>
-            </nav>
-
-            <div class="modal" id="modal">
-                <div class="modal-header">
-                    <div class="title"></div>
-                    <button data-close-button class="close-button">&times;</button>
-                </div>
-
-                <div class="modal-body">
-                    <img class="modal-image" alt="Beer Image">
-                </div>
+            <div class="modal-body">
+                <img class="modal-image" alt="Beer Image">
             </div>
+        </div>
 
-            <div id="overlay"></div>
+        <div id="overlay"></div>
 
-            <h1>Search Page</h1>
-            <div class="container">
+        <h1>Search Page</h1>
+        <div class="handtag">
+            <div class="hand">
+                
+            </div>
+        </div>
+        <div class="container">
 
-                <div class="container-img">
-                    <div class="foam"></div>
-                    <div class="image-border">
-                        <h2></h2>
-                        <img class="image-bord" alt="Beer Image">
-                    </div>
-
-                    <div class="randomize-beer-button">
-                        <button class="randomize-beer">Random Beer</button>
-                    </div>
-
-                    <div class="container-button">
-                        <button data-modal-target="#modal">See More</button><i class="arrow right"></i>
-                    </div>
+            <div class="container-search">
+                <div class="search-foam"></div>
+                
+                <div class="search-border">                 
+                    
+               
+                    <h3>Sök efter en öl</h3>
+                    <p>hej hej</p>
+                    <input type="text" style="width: 80%;">
+                    
+                </div>
+                <p class="pp"></p>
+                <p></p>
+            
 
                 </div>
             </div>
