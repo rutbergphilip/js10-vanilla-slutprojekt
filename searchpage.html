@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <title>Beer Page</title>
+</head>
+
+<body>
+    <div class="wrap">
+
+        <div class="sidenav">
+            <a href="javascript:void(0)" class="closebtn">&times;</a>
+            <a href="#">Beer Wiki</a>
+            <a href="#">Search Page</a>
+        </div>
+
+        <div class="nav">
+            <span style="font-size:30px;cursor:pointer">&#9776;</span>
+        </div>
+
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <div class="title"></div>
+                <button data-close-button class="close-button">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <img class="modal-image" alt="Beer Image">
+            </div>
+        </div>
+
+        <div id="overlay"></div>
+
+        <h1>Beer Wiki</h1>
+        <div class="container">
+
+            <div class="container-img">
+                <div class="foam"></div>
+                <div class="image-border">
+                    <h2></h2>
+                    <img class="image-bord" alt="Beer Image">
+                </div>
+
+                <div class="randomize-beer-button">
+                    <button class="randomize-beer">Random Beer</button>
+                </div>
+
+                <div class="container-button">
+                    <button data-modal-target="#modal">See More</button><i class="arrow right"></i>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

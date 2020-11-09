@@ -38,7 +38,7 @@ function getIngredients(ingredients) {
 /*       Random Beer On Load       */
 /*---------------------------------*/
 
-function fetchBeerinfo() {
+function fetchBeerInfo() {
     getBeerData().then(beers => {
         // Randomizing beers and putting it inside a variable
         const randomBeer = beers[0]
@@ -57,7 +57,7 @@ function fetchBeerinfo() {
         document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = randomBeer.abv
 
         document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Volume</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = randomBeer.volume.value + " " + randomBeer.volume.unit
+        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = `${randomBeer.volume.value} ${randomBeer.volume.unit}`
 
         document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Ingredients</h4>"
         document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = getIngredients(randomBeer.ingredients.malt)
@@ -74,38 +74,22 @@ function fetchBeerinfo() {
         // document.querySelector(".modal-image").src = randomBeer.image_url
     })
 }
-fetchBeerinfo()
+fetchBeerInfo()
 
-// function clearBeerInfo() {
-//     document.querySelector(".title").removeChild()
-//     document.querySelector(".modal-body").forEach(child => {
-//         child.removeChild(document.querySelectorAll("p"))
-//     })
-// }
-// document.querySelector(".randomize-beer").addEventListener('click', clearBeerInfo)
-
+// Function for clearing the old beer info
 function clearBeerInfo() {
     document.querySelector(".title").innerText = ""
     document.querySelector(".modal-body").innerText = ""
 }
 
+// Clearing the old beer info on button click before randomizing and fetching new information
 document.querySelector(".randomize-beer").addEventListener('click', clearBeerInfo)
 
+// Function for fetching a new beer and printing the data
 function randomizeBeer() {
-    clearBeerInfo()
-    document.querySelector(".randomize-beer").addEventListener('click', fetchBeerinfo)
+    document.querySelector(".randomize-beer").addEventListener('click', fetchBeerInfo)
 }
 randomizeBeer()
-
-// getBeerData().then(beers => {
-//     // Randomizing beers and putting it inside a variable
-//     const randomBeer = beers[0]
-
-//     // Display the fetched random beer on page load
-//     document.querySelector(".image-bord").src = randomBeer.image_url
-//     document.querySelector("h2").innerText = randomBeer.name
-// })
-
 
 /*--------------------*/
 /*       Navbar       */
@@ -113,17 +97,26 @@ randomizeBeer()
 
 function openNav() {
     document.querySelector(".sidenav").style.width = "250px";
-    document.querySelector(".nav").style.marginLeft = "250px";
+    document.querySelector("nav").style.marginLeft = "0";
 }
 
 function closeNav() {
     document.querySelector(".sidenav").style.width = "0";
-    document.querySelector(".nav").style.marginLeft = "0";
+    document.querySelector("nav").style.marginLeft = "0";
 }
 
-document.querySelector(".nav").addEventListener('click', openNav)
+document.querySelector("nav").addEventListener('click', openNav)
 document.querySelector(".closebtn").addEventListener('click', closeNav)
 
+const links = document.querySelectorAll(".sidenav > a")
+
+for (let link of links) {
+    link.addEventListener('click', () => {
+        const wrapHome = document.querySelector(".wrap-home")
+        console.log(wrapHome)
+    })
+}
+// "." + link.innerText.split(" ").join("").toLowerCase()
 /*--------------------*/
 /*        Modal       */
 /*--------------------*/
