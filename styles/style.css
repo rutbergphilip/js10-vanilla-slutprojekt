@@ -78,7 +78,7 @@
 
 /* ----- Body ----- */
 
-.wrap-home {
+.wrap {
     width: 100%;
     height: 100vh;
     background-image: url("https://s1.1zoom.me/b6852/941/Coast_Waves_Beer_Highball_glass_548880_1920x1080.jpg");
@@ -97,6 +97,23 @@
     grid-template-rows: 100%;
     background: linear-gradient(to top, white, white);
     padding: 0px 10px 10px 10px;
+}
+
+.handtag{
+    grid-row: 4/8;
+    grid-column: 2;
+    
+}
+.hand{
+    width: 20vw;
+    height: 100%;
+    border-left: 20px rgb(255, 255, 255) solid;
+    border-top: 20px rgb(255, 255, 255) solid;
+    border-bottom: 20px rgb(255, 255, 255) solid;
+    border-radius: 50%;
+    margin-left: 8vw;
+   
+    
 }
 
 h1 {
@@ -131,7 +148,9 @@ h2 {
 }
 
 .container-img {
-    background: linear-gradient(to top, darkorange, rgb(246, 206, 73));
+    /* background: linear-gradient(to top, darkorange, rgb(246, 206, 73)); */
+    background-image: url(../img/obi1.gif);
+    background-size: cover;
     grid-column: 1;
     grid-row: 1;
     display: flex;
@@ -144,10 +163,29 @@ h2 {
 }
 
 .image-bord {
-    width: 4vw;
-    height: 20vh;
+    width: 3.5vw;
+    height: 23vh;
 }
 
+.randomize-beer{
+   padding: 10px;
+   background: linear-gradient(to top, rgba(255, 166, 0, 0.842), rgba(255, 255, 0, 0.883));
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    font-size: 20px;
+    
+    
+}
+.randomize-beer .active{
+    animation: mymove 1s ease;
+}
+.randomize-beer:hover{
+    transition: 1s ease;
+    opacity: 1;
+    animation: mymove 1s ease;
+
+}
 .container-button {
     grid-column: 1;
     grid-row: 2;
@@ -211,6 +249,11 @@ h2 {
 .nav {
     transition: margin-left .5s;
     padding: 16px;
+}
+
+@keyframes mymove{
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); } 
 }
 
 @media screen and (max-height: 450px) {
