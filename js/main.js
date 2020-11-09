@@ -108,6 +108,10 @@ function closeNav() {
 document.querySelector("nav").addEventListener('click', openNav)
 document.querySelector(".closebtn").addEventListener('click', closeNav)
 
+/*-------------------------*/
+/*     Page navigation     */
+/*-------------------------*/
+
 const links = document.querySelectorAll(".sidenav > a")
 
 for (let link of links) {
