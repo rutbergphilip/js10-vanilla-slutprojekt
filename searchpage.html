@@ -5,21 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="styles/style.css">
-    <title>Beer Page</title>
+    <title>Search Page</title>
 </head>
 
 <body>
-    <div class="wrap">
+    <div class="wrap-home active">
 
         <div class="sidenav">
             <a href="javascript:void(0)" class="closebtn">&times;</a>
-            <a href="#">Beer Wiki</a>
-            <a href="#">Search Page</a>
+             <a href="#" data-tab="beer-wiki">Beer Wiki</a>
+                <a href="#" data-tab="search-page">Search Page</a>
         </div>
 
-        <div class="nav">
+        <nav>
             <span style="font-size:30px;cursor:pointer">&#9776;</span>
-        </div>
+        </nav>
 
         <div class="modal" id="modal">
             <div class="modal-header">
@@ -34,25 +34,29 @@
 
         <div id="overlay"></div>
 
-        <h1>Beer Wiki</h1>
+        <h1>Search Page</h1>
+        <div class="handtag">
+            <div class="hand">
+                
+            </div>
+        </div>
         <div class="container">
 
-            <div class="container-img">
-                <div class="foam"></div>
-                <div class="image-border">
-                    <h2></h2>
-                    <img class="image-bord" alt="Beer Image">
+            <div class="container-search">
+                <div class="search-foam"></div>
+                
+                <div class="search-border">                 
+                    
+               
+                    <h3>Sök efter en öl</h3>
+                    <p>hej hej</p>
+                    <input type="text">
+                    
                 </div>
-
-                <div class="randomize-beer-button">
-                    <button class="randomize-beer">Random Beer</button>
-                </div>
-
-                <div class="container-button">
-                    <button data-modal-target="#modal">See More</button><i class="arrow right"></i>
-                </div>
-
+                <p class="pp"></p>
+                <p></p>
             </div>
+            
         </div>
     </div>
 

@@ -253,6 +253,44 @@ h2 {
     padding: 16px;
 }
 
+/* search page */
+.container-search{
+    background-image: url(../img/obi1.gif);
+    background-size: cover;
+    grid-column: 1;
+    grid-row: 1;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px 10px 0px 0px;
+    padding: 15px 15px none 15px;
+    flex-direction: column;
+    justify-content:space-between;
+    align-items: center;
+}
+.search-border{
+    border: solid rgb(191, 174, 21) 3px;
+    width: 15vw;
+    height: 35vh;
+    background-color: white;
+    border-radius: 40px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 0vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+.search-foam{
+    background-image: url(../img/skum.jpg);
+    height: 10vh;
+    width: 100%;
+    
+    
+}
+.pp{
+    padding: 46px;
+}
+
 @keyframes mymove {
     0% {
         -webkit-transform: rotate(0deg);
