@@ -148,7 +148,6 @@ async function fetchBeerInfoOnSearch(value) {
 }
 
 
-
 /*--------------------*/
 /*        Modal       */
 /*--------------------*/
