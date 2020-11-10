@@ -108,25 +108,36 @@ function closeNav() {
 document.querySelector("nav").addEventListener('click', openNav)
 document.querySelector(".closebtn").addEventListener('click', closeNav)
 
+
+
+
 /*-------------------------*/
 /*     Page navigation     */
 /*-------------------------*/
 
 const links = document.querySelectorAll(".sidenav > a")
-
+const wrap = document.querySelector(".wrap")
+const search = document.querySelector(".search")
 const link = document.querySelector("a[data-tab]")
 const tab = link.getAttribute("data-tab")
 const section = document.querySelector("." + tab)
+const closebtn = document.querySelector(".closebtn")
 
 const activeClass = document.querySelectorAll("main > section")
-
+wrap.classList.remove('active');
 for (let link of links) {
     link.addEventListener('click', () => {
         document.querySelectorAll("main > section").forEach(section => {
             console.log(section)
+            wrap.classList.add('active');
+            search.classList.remove('active');
+            
+            console.log(search)
         })
     })
 }
+
+
 
 // const activeclass = document.querySelectorAll('main > section');
 
