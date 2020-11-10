@@ -13,16 +13,6 @@ async function getBeerData() {
 /*       Functions       */
 /*-----------------------*/
 
-// function getMalt(malt) {
-//     let maltInfo = ""
-
-//     malt.forEach(m => {
-//         maltInfo += m.name + "\n"
-//     })
-
-//     return maltInfo
-// }
-
 // Function to format and get the ingredients information
 function getIngredients(ingredients) {
     let ingredientsInfo = ""
@@ -112,21 +102,25 @@ document.querySelector(".closebtn").addEventListener('click', closeNav)
 /*     Page navigation     */
 /*-------------------------*/
 
-const links = document.querySelectorAll(".sidenav > a")
+// const links = document.querySelectorAll(".sidenav > a")
 
-const link = document.querySelector("a[data-tab]")
-const tab = link.getAttribute("data-tab")
-const section = document.querySelector("." + tab)
+// const link = document.querySelector("a[data-tab]")
+// const tab = link.getAttribute("data-tab")
+// const section = document.querySelector("." + tab)
 
-const activeClass = document.querySelectorAll("main > section")
+//const activeClass = document.querySelectorAll("main > section")
 
-for (let link of links) {
-    link.addEventListener('click', () => {
-        document.querySelectorAll("main > section").forEach(section => {
-            console.log(section)
-        })
-    })
-}
+// for (let link of links) {
+//     link.addEventListener('click', () => {
+//         document.querySelectorAll("main > section").forEach(section => {
+//             section.classList.remove("active")
+
+//         })
+//         const section = document.querySelector("." + link.innerText.toLowerCase())
+//         console.log(link)
+//         section.classList.add("active")
+//     })
+// }
 
 // const activeclass = document.querySelectorAll('main > section');
 
@@ -141,7 +135,20 @@ for (let link of links) {
 //     e.target.classList.add('active');
 // }
 
-// "." + link.innerText.split(" ").join("").toLowerCase()
+/*---------------------*/
+/*     Search Page     */
+/*---------------------*/
+
+const searchBox = document.querySelector("input")
+
+async function fetchBeerInfoOnSearch(value) {
+    let req = await fetch(`https://api.punkapi.com/v2/beers?beer_name=${value}`)
+    let res = await req.json()
+    return res
+}
+
+
+
 /*--------------------*/
 /*        Modal       */
 /*--------------------*/
