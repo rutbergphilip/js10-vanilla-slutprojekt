@@ -9,13 +9,16 @@
 </head>
 
 <body>
+    
+    <div class="wrap active">
     <main>
-        <section class="beer-wiki active">
+        
+        <section class="wrap-home active">
 
             <div class="sidenav">
                 <a href="javascript:void(0)" class="closebtn">&times;</a>
-                <a href="#">Beer-Wiki</a>
-                <a href="#">Search-Page</a>
+                <a href="#" data-tab="beer-wiki">Beer Wiki</a>
+                <a href="#" data-tab="search-page">Search Page</a>
             </div>
 
             <nav>
@@ -38,7 +41,7 @@
             <h1>Beer Wiki</h1>
             <div class="handtag">
                 <div class="hand">
-
+                    
                 </div>
             </div>
             <div class="container">
@@ -60,58 +63,64 @@
 
                 </div>
             </div>
+        </div>
         </section>
+        <div class="search active">
 
-        <section class="search-page">
+        
+        <section class="wrap-search">
 
-            <div class="sidenav">
+             <div class="sidenav">
                 <a href="javascript:void(0)" class="closebtn">&times;</a>
-                <a href="#">Beer-Wiki</a>
-                <a href="#">Search-Page</a>
+                <a href="#" data-tab="beer-wiki">Beer Wiki</a>
+                <a href="#" data-tab="search-page">Search Page</a>
             </div>
 
-            <nav>
-                <span style="font-size:30px;cursor:pointer">&#9776;</span>
-            </nav>
+        <nav>
+            <span style="font-size:30px;cursor:pointer">&#9776;</span>
+        </nav>
 
-            <div class="modal" id="modal">
-                <div class="modal-header">
-                    <div class="title"></div>
-                    <button data-close-button class="close-button">&times;</button>
-                </div>
-
-                <div class="modal-body">
-                    <img class="modal-image" alt="Beer Image">
-                </div>
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <div class="title"></div>
+                <button data-close-button class="close-button">&times;</button>
             </div>
 
-            <div id="overlay"></div>
+            <div class="modal-body">
+                <img class="modal-image" alt="Beer Image">
+            </div>
+        </div>
 
-            <h1>Search Page</h1>
-            <div class="handtag">
-                <div class="hand">
+        <div id="overlay"></div>
+
+        <h1>Search Page</h1>
+        <div class="handtag">
+            <div class="hand">
+                
+            </div>
+        </div>
+        <div class="container">
+
+            <div class="container-search">
+                <div class="search-foam"></div>
+                
+                <div class="search-border ">                 
+                    
+               
+                    <h3>Sök efter en öl</h3>
+                    <p>hej hej</p>
+                    <input type="text" style="width: 80%;">
+                    
+                </div>
+                <p class="pp"></p>
+                <p></p>
+            </div>
 
                 </div>
-            </div>
-            <div class="container">
-
-                <div class="container-search">
-                    <div class="search-foam"></div>
-
-                    <div class="search-border">
-
-                        <h3>Search for a beer</h3>
-                        <input type="text" style="width: 80%;">
-                        <p>hej hej</p>
-
-                    </div>
-                    <p class="pp"></p>
-                    <p></p>
-
-
-                </div>
-            </div>
+          
         </section>
+    </div>
+    </div>
     </main>
 
 
