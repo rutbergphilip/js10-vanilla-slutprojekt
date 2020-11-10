@@ -9,17 +9,16 @@
 </head>
 
 <body>
-    
-    <div class="wrap active">
-    <main>
-        
-        <section class="wrap-home active">
 
-            <div class="sidenav">
-                <a href="javascript:void(0)" class="closebtn">&times;</a>
-                <a href="#" data-tab="beer-wiki">Beer Wiki</a>
-                <a href="#" data-tab="search-page">Search Page</a>
-            </div>
+    <main>
+
+        <div class="sidenav">
+            <a href="javascript:void(0)" class="closebtn">&times;</a>
+            <a href="#" class="beer-wiki">Beer Wiki</a>
+            <a href="#" class="search-page">Search Page</a>
+        </div>
+
+        <section class="wrap-home active">
 
             <nav>
                 <span style="font-size:30px;cursor:pointer">&#9776;</span>
@@ -41,7 +40,7 @@
             <h1>Beer Wiki</h1>
             <div class="handtag">
                 <div class="hand">
-                    
+
                 </div>
             </div>
             <div class="container">
@@ -63,64 +62,61 @@
 
                 </div>
             </div>
-        </div>
-        </section>
-        <div class="search active">
 
-        
+        </section>
+
         <section class="wrap-search">
 
-             <div class="sidenav">
-                <a href="javascript:void(0)" class="closebtn">&times;</a>
-                <a href="#" data-tab="beer-wiki">Beer Wiki</a>
-                <a href="#" data-tab="search-page">Search Page</a>
-            </div>
+            <nav class="nav1">
+                <span style="font-size:30px;cursor:pointer">&#9776;</span>
+            </nav>
 
-        <nav>
-            <span style="font-size:30px;cursor:pointer">&#9776;</span>
-        </nav>
-
-        <div class="modal" id="modal">
-            <div class="modal-header">
-                <div class="title"></div>
-                <button data-close-button class="close-button">&times;</button>
-            </div>
-
-            <div class="modal-body">
-                <img class="modal-image" alt="Beer Image">
-            </div>
-        </div>
-
-        <div id="overlay"></div>
-
-        <h1>Search Page</h1>
-        <div class="handtag">
-            <div class="hand">
-                
-            </div>
-        </div>
-        <div class="container">
-
-            <div class="container-search">
-                <div class="search-foam"></div>
-                
-                <div class="search-border ">                 
-                    
-               
-                    <h3>Sök efter en öl</h3>
-                    <p>hej hej</p>
-                    <input type="text" style="width: 80%;">
-                    
+            <div class="modal" id="modal">
+                <div class="modal-header">
+                    <div class="title"></div>
+                    <button data-close-button class="close-button">&times;</button>
                 </div>
-                <p class="pp"></p>
-                <p></p>
+
+                <div class="modal-body">
+                    <img class="modal-image" alt="Beer Image">
+                </div>
             </div>
+
+            <div id="overlay"></div>
+
+            <h1>Search Page</h1>
+            <div class="handtag">
+                <div class="hand">
 
                 </div>
-          
+            </div>
+            <div class="container">
+
+                <div class="container-search">
+                    <div class="search-foam"></div>
+
+                    <div class="search-border ">
+
+
+                        <h3>Search for a beer</h3>
+                        <form>
+                            <input type="text" style="">
+                            <button class="search-beer">Search</button>
+                        </form>
+
+                        <ul class="search-result">
+                        </ul>
+
+                    </div>
+                    <p class="pp"></p>
+                    <p></p>
+                </div>
+
+            </div>
+
         </section>
-    </div>
-    </div>
+
+        </div>
     </main>
 
 

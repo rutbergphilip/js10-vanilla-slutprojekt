@@ -96,63 +96,61 @@ function closeNav() {
 }
 
 document.querySelector("nav").addEventListener('click', openNav)
+document.querySelector(".nav1").addEventListener('click', openNav)
+
 document.querySelector(".closebtn").addEventListener('click', closeNav)
-
-
-
 
 /*-------------------------*/
 /*     Page navigation     */
 /*-------------------------*/
 
-const links = document.querySelectorAll(".sidenav > a")
-const wrap = document.querySelector(".wrap")
-const search = document.querySelector(".search")
-const link = document.querySelector("a[data-tab]")
-const tab = link.getAttribute("data-tab")
-const section = document.querySelector("." + tab)
-const closebtn = document.querySelector(".closebtn")
+const wrapHome = document.querySelector(".wrap-home")
+const wrapSearch = document.querySelector(".wrap-search")
+const beerWiki = document.querySelector(".beer-wiki")
+const searchPage = document.querySelector(".search-page")
 
-const activeClass = document.querySelectorAll("main > section")
-wrap.classList.remove('active');
-for (let link of links) {
-    link.addEventListener('click', () => {
-        document.querySelectorAll("main > section").forEach(section => {
-            console.log(section)
-            wrap.classList.add('active');
-            search.classList.remove('active');
+wrapHome.classList.add("active")
+wrapSearch.classList.remove("active")
 
-            console.log(search)
-        })
-    })
-}
+searchPage.addEventListener('click', () => {
+    wrapHome.classList.add("active")
+    wrapSearch.classList.remove("active")
 
+    closeNav()
+})
+beerWiki.addEventListener('click', () => {
+    wrapHome.classList.remove("active")
+    wrapSearch.classList.add("active")
 
-
-// const activeclass = document.querySelectorAll('main > section');
-
-// for (let i = 0; i < activeclass.length; i++) {
-//     activeclass[i].addEventListener('click', activateClass);
-// }
-
-// function activateClass(e) {
-//     for (let i = 0; i < activeclass.length; i++) {
-//         activeclass[i].classList.remove('active');
-//     }
-//     e.target.classList.add('active');
-// }
+    closeNav()
+})
 
 /*---------------------*/
 /*     Search Page     */
 /*---------------------*/
 
-const searchBox = document.querySelector("input")
 
-async function fetchBeerInfoOnSearch(value) {
+
+// Function for grabbing the name search API + the user input
+async function getBeerDataOnSearch(value) {
     let req = await fetch(`https://api.punkapi.com/v2/beers?beer_name=${value}`)
     let res = await req.json()
     return res
 }
+
+// Declaring the user input box
+const userInput = document.querySelector("input").value
+
+// Search result list
+getBeerDataOnSearch(userInput).then(beer => {
+
+    const searchBtn = document.querySelector(".search-beer")
+
+    searchBtn.addEventListener('click', () => {
+        console.log(beer)
+        document.querySelector("ul").appendChild(document.createElement("li")).innerText = beer.name
+    })
+})
 
 
 /*--------------------*/
