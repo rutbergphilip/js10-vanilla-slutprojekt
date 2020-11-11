@@ -130,27 +130,29 @@ beerWiki.addEventListener('click', () => {
 /*---------------------*/
 
 
+// Declaring the user input box
+const userInput = document.querySelector("input").value
+    // Declaring the search btn and adding eventlistener
+const searchBtn = document.querySelector(".search-beer").addEventListener('click', getBeerDataOnSearch)
 
 // Function for grabbing the name search API + the user input
-async function getBeerDataOnSearch(value) {
-    let req = await fetch(`https://api.punkapi.com/v2/beers?beer_name=${value}`)
+async function getBeerDataOnSearch() {
+    let req = await fetch(`https://api.punkapi.com/v2/beers?beer_name=${userInput}`)
     let res = await req.json()
     return res
 }
 
-// Declaring the user input box
-const userInput = document.querySelector("input").value
 
-// Search result list
-getBeerDataOnSearch(userInput).then(beer => {
+// // Search result list
+// getBeerDataOnSearch(userInput).then(beer => {
 
-    const searchBtn = document.querySelector(".search-beer")
 
-    searchBtn.addEventListener('click', () => {
-        console.log(beer)
-        document.querySelector("ul").appendChild(document.createElement("li")).innerText = beer.name
-    })
-})
+
+//     searchBtn.addEventListener('click', () => {
+//         console.log(beer)
+//         document.querySelector("ul").appendChild(document.createElement("li")).innerText = beer.name
+//     })
+// })
 
 
 /*--------------------*/
