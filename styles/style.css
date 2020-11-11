@@ -314,6 +314,10 @@ li {
     padding: 46px;
 }
 
+.pagination button{
+    padding: 20px;
+}
+
 @keyframes mymove {
     0% {
         -webkit-transform: rotate(0deg);

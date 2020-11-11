@@ -114,50 +114,82 @@ beerWiki.addEventListener('click', () => {
 /*     Search Page     */
 /*---------------------*/
 
-getBeerDataOnSearch("lager")
-
 // Function for grabbing the name search API + the user input
 async function getBeerDataOnSearch(userInput) {
     let req = await fetch(`https://api.punkapi.com/v2/beers?beer_name=${userInput}`)
     let res = await req.json()
-    console.log(res)
+
     return res
 }
-
-// Declaring the user input box
-const userInput = document.querySelector("input").value
 
 // Declaring the search btn
 const searchBtn = document.querySelector(".search-beer")
 
-/* ---------------------------------------------------------- */
+async function searchResult() {
+    // Declaring the user input box
+    const userInput = document.querySelector("input").value.toLowerCase()
+    console.log(userInput)
 
-var list = document.querySelectorAll("ul > li")
+    let beer = await getBeerDataOnSearch(userInput)
+    const saveResult = []
 
-async function createResultList(userInput) {
-    let beerData = await getBeerDataOnSearch(userInput)
-    console.log(beerData)
 
-    for (let i = 0; i < beerData.length; i++) {
-
-        document.querySelector("ul").appendChild(document.createElement("li")).innerText[i] = beerData[i].name
+    for (let i = 0; i < beer.length; i++) {
+        saveResult.push(beer[i])
     }
+
+    //console.log(saveResult)
+    renderData(saveResult)
 }
 
-searchBtn.addEventListener("click", createResultList)
+function renderData(saveResult, pageNumber) {
+    const nameOfUl = document.querySelector(".search-result")
+        //let pageNumber = 0
+    let pages = Math.ceil(saveResult.length / 10)
+        // let pageNum = 1
+        // let indexToRender = 0
 
+    for (let i = 0; i < 10; i++) {
+        addItemToUl(saveResult[i].name, nameOfUl)
+    }
 
-// // Search result list
-// getBeerDataOnSearch(userInput).then(beer => {
+    for (let n = 1; n < pages + 1; n++) {
+        const nav = document.querySelector(".pagination")
+        const link = document.createElement("button")
 
+        link.href = "#"
+        link.innerText = n
 
+        link.addEventListener('click', changePages)
 
-//     searchBtn.addEventListener('click', () => {
-//         console.log(beer)
-//         document.querySelector("ul").appendChild(document.createElement("li")).innerText = beer.name
-//     })
-// })
+        nav.append(link)
+    }
+    console.log(pageNumber)
+}
 
+function changePages(e) {
+    const pageNumber = e.target.innerText
+    console.log(e.target)
+        //console.log(pageNumber)
+
+    renderData(pageNumber)
+}
+
+function clearBeer() {
+    const nameOfUl = document.querySelector(".search-result")
+    nameOfUl.innerHTML = ""
+}
+
+function addItemToUl(item, nameOfUl) {
+    const listItem = document.createElement('li');
+    listItem.innerHTML = item;
+    nameOfUl.append(listItem);
+}
+
+searchBtn.addEventListener('click', () => {
+    clearBeer()
+    searchResult()
+})
 
 /*--------------------*/
 /*        Modal       */
