@@ -9,21 +9,6 @@ async function getBeerData() {
     return response
 };
 
-/*-----------------------*/
-/*       Functions       */
-/*-----------------------*/
-
-// Function to format and get the ingredients information
-function getIngredients(ingredients) {
-    let ingredientsInfo = ""
-
-    ingredients.forEach(ing => {
-        ingredientsInfo += `${ing.name} ${ing.amount.value} ${ing.amount.unit}\n`
-    })
-
-    return ingredientsInfo
-}
-
 /*---------------------------------*/
 /*       Random Beer On Load       */
 /*---------------------------------*/
@@ -129,20 +114,21 @@ beerWiki.addEventListener('click', () => {
 /*     Search Page     */
 /*---------------------*/
 
+getBeerDataOnSearch("lager")
+
+// Function for grabbing the name search API + the user input
+async function getBeerDataOnSearch(userInput) {
+    let req = await fetch(`https://api.punkapi.com/v2/beers?beer_name=${userInput}`)
+    let res = await req.json()
+    console.log(res)
+    return res
+}
 
 // Declaring the user input box
 const userInput = document.querySelector("input").value
 
 // Declaring the search btn
 const searchBtn = document.querySelector(".search-beer")
-
-// Function for grabbing the name search API + the user input
-async function getBeerDataOnSearch(userInput) {
-    let req = await fetch(`https://api.punkapi.com/v2/beers?beer_name=${userInput}`)
-    let res = await req.json()
-    return res
-}
-
 
 /* ---------------------------------------------------------- */
 
@@ -212,4 +198,24 @@ function closeModal(modal) {
     if (modal == null) return
     modal.classList.remove('active')
     overlay.classList.remove('active')
+}
+
+/*-----------------------*/
+/*       Functions       */
+/*-----------------------*/
+
+// Function to format and get the ingredients information
+function getIngredients(ingredients) {
+    let ingredientsInfo = ""
+
+    ingredients.forEach(ing => {
+        ingredientsInfo += `${ing.name} ${ing.amount.value} ${ing.amount.unit}\n`
+    })
+
+    return ingredientsInfo
+}
+
+// Prevent form from refreshing the page
+function preventDefault(event) {
+    event.preventDefault();
 }
