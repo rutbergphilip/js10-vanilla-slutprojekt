@@ -142,37 +142,39 @@ async function searchResult() {
     renderData(saveResult)
 }
 
-function renderData(saveResult, pageNumber) {
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+
+function renderData(pageNumber, num) {
     const nameOfUl = document.querySelector(".search-result")
-        //let pageNumber = 0
-    let pages = Math.ceil(saveResult.length / 10)
-        // let pageNum = 1
-        // let indexToRender = 0
-
-    for (let i = 0; i < 10; i++) {
-        addItemToUl(saveResult[i].name, nameOfUl)
+    pageNumber = Math.ceil(arr.length / 10)
+    num = 1
+    pn = num * 10
+    for (let i = pn; i < num * 10; i++) {
+        addItemToUl(arr[i], nameOfUl)
     }
+    creatNav(pageNumber)
+}
 
-    for (let n = 1; n < pages + 1; n++) {
+function creatNav(pageNumber) {
+    for (let n = 0; n < pageNumber; n++) {
         const nav = document.querySelector(".pagination")
         const link = document.createElement("button")
 
         link.href = "#"
-        link.innerText = n
+        link.innerText = n + 1
 
         link.addEventListener('click', changePages)
 
         nav.append(link)
     }
-    console.log(pageNumber)
 }
 
 function changePages(e) {
-    const pageNumber = e.target.innerText
-    console.log(e.target)
+    const num = e.target.innerText
+    console.log(num)
         //console.log(pageNumber)
 
-    renderData(pageNumber)
+    renderData(num)
 }
 
 function clearBeer() {
