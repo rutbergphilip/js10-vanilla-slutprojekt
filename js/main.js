@@ -136,34 +136,34 @@ function fetchClickedBeerInfo() {
         const clickedBeer = beer.target.dataset
 
         // Display the fetched random beer on page load
-        document.querySelector(".image-bord").src = randomBeer.image_url
-        document.querySelector("h2").innerText = randomBeer.name
+        document.querySelector(".image-bord").src = clickedBeer.image_url
+        document.querySelector("h2").innerText = clickedBeer.name
 
         // Display the fetched random beer info on modal
-        document.querySelector(".title").innerText = randomBeer.name
+        document.querySelector(".title").innerText = clickedBeer.name
 
         document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<h4>Description</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p-description")).innerText = randomBeer.description
+        document.querySelector(".modal-body").appendChild(document.createElement("p-description")).innerText = clickedBeer.description
 
         document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Alcohol by volume</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = randomBeer.abv
+        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = clickedBeer.abv
 
         document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Volume</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = `${randomBeer.volume.value} ${randomBeer.volume.unit}`
+        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = `${clickedBeer.volume.value} ${clickedBeer.volume.unit}`
 
         document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Ingredients</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = getIngredients(randomBeer.ingredients.malt)
+        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = getIngredients(clickedBeer.ingredients.malt)
 
         document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Hops</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = getIngredients(randomBeer.ingredients.hops)
+        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = getIngredients(clickedBeer.ingredients.hops)
 
         document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Food pairing</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = randomBeer.food_pairing
+        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = clickedBeer.food_pairing
 
         document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Brewers tips</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = randomBeer.brewers_tips
+        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = clickedBeer.brewers_tips
 
-        document.querySelector(".modal-image").src = randomBeer.image_url
+        document.querySelector(".modal-image").src = clickedBeer.image_url
     })
 }
 fetchClickedBeerInfo()
