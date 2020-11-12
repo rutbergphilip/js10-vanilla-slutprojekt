@@ -18,27 +18,38 @@
             <a href="#" class="search-page">Search Page</a>
         </div>
 
+        <div class="modal" id="modal">
+
+            <div class="modal-header">
+
+                <space></space>
+                <div class="title"></div>
+                <button data-close-button class="close-button">&times;</button>
+
+            </div>
+
+            <div class="modal-container">
+
+                <div class="modal-container-image">
+                    <img class="modal-image" alt="Beer Image">
+                </div>
+
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+
+        <div id="overlay"></div>
+
         <section class="wrap-home active">
 
             <nav>
                 <span style="font-size:30px;cursor:pointer">&#9776;</span>
             </nav>
 
-            <div class="modal" id="modal">
-                <div class="modal-header">
-                    <div class="title"></div>
-                    <button data-close-button class="close-button">&times;</button>
-                </div>
-
-                <div class="modal-body">
-                    <img class="modal-image" alt="Beer Image">
-                </div>
-            </div>
-
-            <div id="overlay"></div>
-
             <h1>Beer Wiki</h1>
-            <div class="handtag">
+            <div class="handle">
                 <div class="hand">
 
                 </div>
@@ -57,7 +68,7 @@
                     </div>
 
                     <div class="container-button">
-                        <button data-modal-target="#modal">See More</button><i class="arrow right"></i>
+                        <button data-modal-target="#modal">See More</button>
                     </div>
 
                 </div>
@@ -71,21 +82,8 @@
                 <span style="font-size:30px;cursor:pointer">&#9776;</span>
             </nav>
 
-            <div class="modal" id="modal">
-                <div class="modal-header">
-                    <div class="title"></div>
-                    <button data-close-button class="close-button">&times;</button>
-                </div>
-
-                <div class="modal-body">
-                    <img class="modal-image" alt="Beer Image">
-                </div>
-            </div>
-
-            <div id="overlay"></div>
-
             <h1>Search Page</h1>
-            <div class="handtag">
+            <div class="handle">
                 <div class="hand">
 
                 </div>
@@ -97,10 +95,8 @@
 
                     <div class="search-border ">
 
-
-                        <h3>Search for a beer</h3>
                         <form>
-                            <input type="text" form onsubmit="preventDefault(event)">
+                            <input type="text" form onsubmit="preventDefault(event)" placeholder="Search for a beer">
                             <button class="search-beer" form onsubmit="preventDefault(event)">Search</button>
                         </form>
 
@@ -109,6 +105,9 @@
                         </ul>
                         <nav class="pagination">
                         </nav>
+
+                    </div>
+                    <div class="page-buttons">
 
                     </div>
                 </div>
