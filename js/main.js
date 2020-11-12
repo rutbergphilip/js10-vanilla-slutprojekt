@@ -124,35 +124,52 @@ async function getBeerDataOnSearch(userInput) {
 
 // Declaring the search btn
 const searchBtn = document.querySelector(".search-beer")
+let searchBeerResult = []
 
 async function searchResult() {
     // Declaring the user input box
+    clearNav()
     const userInput = document.querySelector("input").value.toLowerCase()
     console.log(userInput)
 
-    let beer = await getBeerDataOnSearch(userInput)
-    const saveResult = []
+    searchBeerResult = await getBeerDataOnSearch(userInput)
+    console.log(searchBeerResult)
+
+    const numberOfPages = Math.ceil(searchBeerResult.length / 10)
+    creatNav(numberOfPages)
+        /*const saveResult = []
 
 
-    for (let i = 0; i < beer.length; i++) {
-        saveResult.push(beer[i])
-    }
+        for (let i = 0; i < beer.length; i++) {
+            saveResult.push(beer[i])
+        }*/
 
     //console.log(saveResult)
-    renderData(saveResult)
+    renderData(1)
 }
 
 let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
-function renderData(pageNumber, num) {
+
+function renderData(pageNumber) {
     const nameOfUl = document.querySelector(".search-result")
-    pageNumber = Math.ceil(arr.length / 10)
+    nameOfUl.innerHTML = ""
     num = 1
     pn = num * 10
-    for (let i = pn; i < num * 10; i++) {
-        addItemToUl(arr[i], nameOfUl)
+
+    const startIndex = (pageNumber - 1) * 10
+    let endIndex
+
+    if (pageNumber * 10 > searchBeerResult.length) {
+        endIndex = searchBeerResult.length
+    } else {
+        endIndex = pageNumber * 10
     }
-    creatNav(pageNumber)
+
+    for (let i = startIndex; i < endIndex; i++) {
+        addItemToUl(searchBeerResult[i], nameOfUl)
+    }
+
 }
 
 function creatNav(pageNumber) {
@@ -167,6 +184,11 @@ function creatNav(pageNumber) {
 
         nav.append(link)
     }
+}
+
+function clearNav() {
+    const nav = document.querySelector(".pagination")
+    nav.innerHTML = ''
 }
 
 function changePages(e) {
@@ -184,7 +206,7 @@ function clearBeer() {
 
 function addItemToUl(item, nameOfUl) {
     const listItem = document.createElement('li');
-    listItem.innerHTML = item;
+    listItem.innerHTML = item.name;
     nameOfUl.append(listItem);
 }
 
