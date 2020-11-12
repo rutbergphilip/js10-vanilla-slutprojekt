@@ -6,6 +6,7 @@ async function getRandomBeerData() {
     // Declaring and getting the API
     const request = await fetch('https://api.punkapi.com/v2/beers/random')
     const response = await request.json()
+
     return response
 };
 
@@ -13,10 +14,12 @@ async function getRandomBeerData() {
 /*       Random Beer On Load       */
 /*---------------------------------*/
 
+let randomBeer
+
 function fetchBeerInfo() {
     getRandomBeerData().then(beers => {
         // Randomizing beers and putting it inside a variable
-        const randomBeer = beers[0]
+        randomBeer = beers[0]
 
         // Display the fetched random beer on page load
         document.querySelector(".image-bord").src = randomBeer.image_url
@@ -123,40 +126,84 @@ beerWiki.addEventListener('click', () => {
 /*---------------------*/
 
 // Function for grabbing the name search API + the user input
-async function getBeerDataOnSearch(userInput) {
-    let req = await fetch(`https://api.punkapi.com/v2/beers?beer_name=${userInput}`)
+async function getBeerDataOnSearch(userInput, page) {
+    let req = await fetch(`https://api.punkapi.com/v2/beers?beer_name=${userInput}&per_page=80&page=${page}`)
     let res = await req.json()
 
     return res
 }
-
-// Target the exact anchor
-// Edit the onclick events for said target
-// Use the new function made to fetch that specified information
 
 // Declaring the search btn
 const searchBtn = document.querySelector(".search-beer")
 const inputBox = document.querySelector("input")
 let searchBeerResult = []
 
+// Creating a variable used to store the amount of pages necessary for the pagination function later
+let numberOfPages
+
 async function searchResult() {
-    clearNav()
 
     // Declaring the user input value
     const userInput = document.querySelector("input").value.toLowerCase()
-    console.log(userInput)
 
-    // Wait for the results on user input
-    searchBeerResult = await getBeerDataOnSearch(userInput)
-    console.log(searchBeerResult)
+    let page = 1
+    while (page != 0) {
+        // Creating a variable to store the result so we can add it or stop the loop
+        let auxSearchResult = await getBeerDataOnSearch(userInput, page)
+            // If the result length is greater than 0, we want to add the temporary variable to the "main" array
+        if (auxSearchResult.length > 0) {
+            searchBeerResult = searchBeerResult.concat(auxSearchResult)
+            page++
+        } else {
+            page = 0
+        }
+    }
 
     // Calculating the number of pages necessary based on the result
-    const numberOfPages = Math.ceil(searchBeerResult.length / 10)
-    creatNav(numberOfPages)
+    numberOfPages = Math.ceil(searchBeerResult.length / 10)
+    document.querySelector(".total-page").innerHTML = numberOfPages
 
     // Sending in 1 because we want to see the first batch of beers on the result array
     // Putting a 2 would show us everything on page 2
     renderData(1)
+}
+
+// Declaring the buttons for previous and next
+const btnPrevious = document.querySelector(".previous")
+const btnNext = document.querySelector(".next")
+
+// Adding listeners to the buttons and calling the functions for previous and next page
+btnPrevious.addEventListener('click', previousPage)
+btnNext.addEventListener('click', nextPage)
+
+// Function for the next page button
+function nextPage() {
+    //Declaring the current page paragraph
+    let currentPage = document.querySelector("p .current-page")
+    let pageNum = currentPage.innerHTML
+
+    if (pageNum < numberOfPages) {
+        pageNum++
+    } else {
+        pageNum = 1
+    }
+    renderData(pageNum)
+    currentPage.innerHTML = pageNum
+}
+
+// Function for the nexprevious page button
+function previousPage() {
+    //Declaring the current page paragraph
+    let currentPage = document.querySelector("p .current-page")
+    let pageNum = currentPage.innerHTML
+
+    if (pageNum > 1) {
+        pageNum--
+    } else {
+        pageNum = numberOfPages
+    }
+    renderData(pageNum)
+    currentPage.innerHTML = pageNum
 }
 
 function renderData(pageNumber) {
@@ -167,6 +214,8 @@ function renderData(pageNumber) {
     const startIndex = (pageNumber - 1) * 10
     let endIndex
 
+    // Multiply the amount of pages by maximum allowed items per page (10)
+    // If this is greater than searchBeerResult.length we want to put the endIndex as the total result length
     if (pageNumber * 10 > searchBeerResult.length) {
         endIndex = searchBeerResult.length
     } else {
@@ -176,24 +225,6 @@ function renderData(pageNumber) {
     // Loop through and add the beers to the list
     for (let i = startIndex; i < endIndex; i++) {
         addItemToUl(searchBeerResult[i], i, nameOfUl)
-    }
-}
-
-
-// Function to create the navbar for search page result navigation
-function creatNav(pageNumber) {
-    // For loop will help us create a button for each page necessary
-    for (let n = 0; n < pageNumber; n++) {
-        const nav = document.querySelector(".page-buttons")
-        const btn = document.createElement("button")
-
-        // Setting the button name to n + 1, showing the page number on the buttons starting from 1
-        btn.href = "#"
-        btn.innerText = n + 1
-
-        btn.addEventListener('click', changePages)
-
-        nav.append(btn)
     }
 }
 
@@ -222,35 +253,21 @@ const overlay = document.getElementById('overlay')
 // Break out the modal buttons to target the links inside search page easier
 const modalCallback = event => {
     const beerIndex = event.target.innerText.split(' - ')
-    const selectedBeer = searchBeerResult[beerIndex[0] - 1]
+    let selectedBeer
+
+    // isNaN verifies if the first position of the array is a number, and if it is it means that comes from the search page
+    if (!isNaN(beerIndex[0])) {
+        // Getting the beer index through the name
+        selectedBeer = searchBeerResult[beerIndex[0] - 1]
+    } else {
+        selectedBeer = randomBeer
+    }
     console.log(selectedBeer)
+
+    // Targeting the clicked beer to the modal
     const modal = document.querySelector(event.target.dataset.modalTarget)
 
-    clearBeerInfo()
-    document.querySelector(".title").innerText = selectedBeer.name
-
-    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<h4>Description</h4>"
-    document.querySelector(".modal-body").appendChild(document.createElement("p-description")).innerText = selectedBeer.description
-
-    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Alcohol by volume</h4>"
-    document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = selectedBeer.abv
-
-    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Volume</h4>"
-    document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = `${selectedBeer.volume.value} ${selectedBeer.volume.unit}`
-
-    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Ingredients</h4>"
-    document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = getIngredients(selectedBeer.ingredients.malt)
-
-    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Hops</h4>"
-    document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = getIngredients(selectedBeer.ingredients.hops)
-
-    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Food pairing</h4>"
-    document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = selectedBeer.food_pairing
-
-    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Brewers tips</h4>"
-    document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = selectedBeer.brewers_tips
-
-    document.querySelector(".modal-image").src = selectedBeer.image_url
+    buildModalBeerData(selectedBeer)
 
     openModal(modal)
 }
@@ -309,12 +326,6 @@ function preventDefault(event) {
     event.preventDefault();
 }
 
-function clearNav() {
-    // Clearing the navbar 
-    const nav = document.querySelector(".page-buttons")
-    nav.innerHTML = ""
-}
-
 function changePages(e) {
     // Changing pages based on the clicked page button
     const num = e.target.innerText
@@ -338,12 +349,37 @@ function addItemToUl(item, indexOnArray, nameOfUl) {
     listAnchor.href = '#'
     listAnchor.setAttribute('data-modal-target', '#modal')
     listAnchor.innerHTML = `${indexOnArray+1} - ${item.name}`
-        //listAnchor.classList.add(`${}`)
     listAnchor.addEventListener('click', modalCallback)
 
     nameOfUl.append(listItem)
 }
 
-function buildModalData() {
+function buildModalBeerData(selectedBeer) {
+    // Clear the previous beer info before showing the new
+    clearBeerInfo()
 
+    document.querySelector(".title").innerText = selectedBeer.name
+
+    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<h4>Description</h4>"
+    document.querySelector(".modal-body").appendChild(document.createElement("p-description")).innerText = selectedBeer.description
+
+    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Alcohol by volume</h4>"
+    document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = selectedBeer.abv
+
+    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Volume</h4>"
+    document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = `${selectedBeer.volume.value} ${selectedBeer.volume.unit}`
+
+    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Ingredients</h4>"
+    document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = getIngredients(selectedBeer.ingredients.malt)
+
+    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Hops</h4>"
+    document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = getIngredients(selectedBeer.ingredients.hops)
+
+    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Food pairing</h4>"
+    document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = selectedBeer.food_pairing
+
+    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Brewers tips</h4>"
+    document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = selectedBeer.brewers_tips
+
+    document.querySelector(".modal-image").src = selectedBeer.image_url
 }
