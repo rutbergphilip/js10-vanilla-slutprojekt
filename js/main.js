@@ -130,43 +130,9 @@ async function getBeerDataOnSearch(userInput) {
     return res
 }
 
-function fetchClickedBeerInfo() {
-    getBeerDataOnSearch().then(beer => {
-        // Randomizing beers and putting it inside a variable
-        const clickedBeer = beer.target.dataset
-
-        // Display the fetched random beer on page load
-        document.querySelector(".image-bord").src = clickedBeer.image_url
-        document.querySelector("h2").innerText = clickedBeer.name
-
-        // Display the fetched random beer info on modal
-        document.querySelector(".title").innerText = clickedBeer.name
-
-        document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<h4>Description</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p-description")).innerText = clickedBeer.description
-
-        document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Alcohol by volume</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = clickedBeer.abv
-
-        document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Volume</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = `${clickedBeer.volume.value} ${clickedBeer.volume.unit}`
-
-        document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Ingredients</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = getIngredients(clickedBeer.ingredients.malt)
-
-        document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Hops</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = getIngredients(clickedBeer.ingredients.hops)
-
-        document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Food pairing</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = clickedBeer.food_pairing
-
-        document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Brewers tips</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = clickedBeer.brewers_tips
-
-        document.querySelector(".modal-image").src = clickedBeer.image_url
-    })
-}
-fetchClickedBeerInfo()
+// Target the exact anchor
+// Edit the onclick events for said target
+// Use the new function made to fetch that specified information
 
 // Declaring the search btn
 const searchBtn = document.querySelector(".search-beer")
@@ -175,7 +141,8 @@ let searchBeerResult = []
 
 async function searchResult() {
     clearNav()
-        // Declaring the user input value
+
+    // Declaring the user input value
     const userInput = document.querySelector("input").value.toLowerCase()
     console.log(userInput)
 
@@ -208,7 +175,7 @@ function renderData(pageNumber) {
 
     // Loop through and add the beers to the list
     for (let i = startIndex; i < endIndex; i++) {
-        addItemToUl(searchBeerResult[i], nameOfUl)
+        addItemToUl(searchBeerResult[i], i, nameOfUl)
     }
 }
 
@@ -254,7 +221,37 @@ const overlay = document.getElementById('overlay')
 
 // Break out the modal buttons to target the links inside search page easier
 const modalCallback = event => {
+    const beerIndex = event.target.innerText.split(' - ')
+    const selectedBeer = searchBeerResult[beerIndex[0] - 1]
+    console.log(selectedBeer)
     const modal = document.querySelector(event.target.dataset.modalTarget)
+
+    clearBeerInfo()
+    document.querySelector(".title").innerText = selectedBeer.name
+
+    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<h4>Description</h4>"
+    document.querySelector(".modal-body").appendChild(document.createElement("p-description")).innerText = selectedBeer.description
+
+    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Alcohol by volume</h4>"
+    document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = selectedBeer.abv
+
+    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Volume</h4>"
+    document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = `${selectedBeer.volume.value} ${selectedBeer.volume.unit}`
+
+    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Ingredients</h4>"
+    document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = getIngredients(selectedBeer.ingredients.malt)
+
+    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Hops</h4>"
+    document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = getIngredients(selectedBeer.ingredients.hops)
+
+    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Food pairing</h4>"
+    document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = selectedBeer.food_pairing
+
+    document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Brewers tips</h4>"
+    document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = selectedBeer.brewers_tips
+
+    document.querySelector(".modal-image").src = selectedBeer.image_url
+
     openModal(modal)
 }
 
@@ -332,7 +329,7 @@ function clearBeer() {
     nameOfUl.innerHTML = ""
 }
 
-function addItemToUl(item, nameOfUl) {
+function addItemToUl(item, indexOnArray, nameOfUl) {
     // Creating the <li> and <a> format to add to the <ul>
     const listItem = document.createElement('li')
     const listAnchor = document.createElement('a')
@@ -340,8 +337,13 @@ function addItemToUl(item, nameOfUl) {
     listItem.append(listAnchor)
     listAnchor.href = '#'
     listAnchor.setAttribute('data-modal-target', '#modal')
+    listAnchor.innerHTML = `${indexOnArray+1} - ${item.name}`
+        //listAnchor.classList.add(`${}`)
     listAnchor.addEventListener('click', modalCallback)
-    listAnchor.innerHTML = item.name
 
     nameOfUl.append(listItem)
+}
+
+function buildModalData() {
+
 }
