@@ -76,13 +76,13 @@ randomizeBeer()
 // Style for open navbar
 function openNav() {
     document.querySelector(".sidenav").style.width = "250px";
-    document.querySelector("nav").style.marginLeft = "0";
+   
 }
 
 // Style for closed navbar
 function closeNav() {
     document.querySelector(".sidenav").style.width = "0";
-    document.querySelector("nav").style.marginLeft = "0";
+   
 }
 
 // Adding listeners to the nav buttons
