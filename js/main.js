@@ -141,16 +141,16 @@ let searchBeerResult = []
 // Creating a variable used to store the amount of pages necessary for the pagination function later
 let numberOfPages
 
+// Creating a temp variable inside the function to store the result so we can add it or stop the loop
+// If the result length is greater than 0, we want to add the temporary variable to the "main" array
 async function searchResult() {
 
-    // Declaring the user input value
     const userInput = document.querySelector("input").value.toLowerCase()
-
     let page = 1
+
     while (page != 0) {
-        // Creating a variable to store the result so we can add it or stop the loop
         let auxSearchResult = await getBeerDataOnSearch(userInput, page)
-            // If the result length is greater than 0, we want to add the temporary variable to the "main" array
+
         if (auxSearchResult.length > 0) {
             searchBeerResult = searchBeerResult.concat(auxSearchResult)
             page++
@@ -168,17 +168,14 @@ async function searchResult() {
     renderData(1)
 }
 
-// Declaring the buttons for previous and next
 const btnPrevious = document.querySelector(".previous")
 const btnNext = document.querySelector(".next")
 
-// Adding listeners to the buttons and calling the functions for previous and next page
 btnPrevious.addEventListener('click', previousPage)
 btnNext.addEventListener('click', nextPage)
 
 // Function for the next page button
 function nextPage() {
-    //Declaring the current page paragraph
     let currentPage = document.querySelector("p .current-page")
     let pageNum = currentPage.innerHTML
 
@@ -193,7 +190,6 @@ function nextPage() {
 
 // Function for the nexprevious page button
 function previousPage() {
-    //Declaring the current page paragraph
     let currentPage = document.querySelector("p .current-page")
     let pageNum = currentPage.innerHTML
 
@@ -207,7 +203,6 @@ function previousPage() {
 }
 
 function renderData(pageNumber) {
-    // Declaring the <ul>
     const nameOfUl = document.querySelector(".search-result")
     nameOfUl.innerHTML = ""
 
@@ -228,7 +223,6 @@ function renderData(pageNumber) {
     }
 }
 
-// Listener to the search button and the inputbox, when clicked, the previous search results should be wiped and the new result should be showcased
 searchBtn.addEventListener('click', () => {
     clearBeer()
     searchResult()
@@ -355,7 +349,6 @@ function addItemToUl(item, indexOnArray, nameOfUl) {
 }
 
 function buildModalBeerData(selectedBeer) {
-    // Clear the previous beer info before showing the new
     clearBeerInfo()
 
     document.querySelector(".title").innerText = selectedBeer.name
