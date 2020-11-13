@@ -102,8 +102,8 @@ const beerWiki = document.querySelector(".beer-wiki")
 const searchPage = document.querySelector(".search-page")
 
 // Setting which page should be default on load
-wrapHome.classList.add("active")
-wrapSearch.classList.remove("active")
+wrapHome.classList.remove("active")
+wrapSearch.classList.add("active")
 
 // Clicking on the Search Page hides the Beer Wiki section
 searchPage.addEventListener('click', () => {
