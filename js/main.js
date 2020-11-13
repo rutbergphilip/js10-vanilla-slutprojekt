@@ -25,31 +25,7 @@ function fetchBeerInfo() {
         document.querySelector(".image-bord").src = randomBeer.image_url
         document.querySelector("h2").innerText = randomBeer.name
 
-        // Display the fetched random beer info on modal
-        document.querySelector(".title").innerText = randomBeer.name
-
-        document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<h4>Description</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p-description")).innerText = randomBeer.description
-
-        document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Alcohol by volume</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = randomBeer.abv
-
-        document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Volume</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = `${randomBeer.volume.value} ${randomBeer.volume.unit}`
-
-        document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Ingredients</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = getIngredients(randomBeer.ingredients.malt)
-
-        document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Hops</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = getIngredients(randomBeer.ingredients.hops)
-
-        document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Food pairing</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = randomBeer.food_pairing
-
-        document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Brewers tips</h4>"
-        document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = randomBeer.brewers_tips
-
-        document.querySelector(".modal-image").src = randomBeer.image_url
+        buildModalBeerData(randomBeer)
     })
 }
 fetchBeerInfo()
@@ -76,13 +52,13 @@ randomizeBeer()
 // Style for open navbar
 function openNav() {
     document.querySelector(".sidenav").style.width = "250px";
-   
+
 }
 
 // Style for closed navbar
 function closeNav() {
     document.querySelector(".sidenav").style.width = "0";
-   
+
 }
 
 // Adding listeners to the nav buttons
