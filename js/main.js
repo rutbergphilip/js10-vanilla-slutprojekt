@@ -320,16 +320,16 @@ function preventDefault(event) {
     event.preventDefault();
 }
 
+// Changing pages based on the clicked page button
 function changePages(e) {
-    // Changing pages based on the clicked page button
     const num = e.target.innerText
     console.log(num)
 
     renderData(num)
 }
 
+// Clearing the beer results
 function clearBeer() {
-    // Clearing the beer results
     const nameOfUl = document.querySelector(".search-result")
     nameOfUl.innerHTML = ""
 }
