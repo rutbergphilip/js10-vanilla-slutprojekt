@@ -387,12 +387,12 @@ input[type=text]:focus {
     cursor: pointer;
 }
 
-.page-buttons {
+.page-buttons-container {
     position: fixed;
     top: 84vh;
 }
 
-.page-buttons button {
+.page-buttons-container button {
     border: solid black 2px
 }
 
@@ -408,7 +408,7 @@ input[type=text]:focus {
     border: solid black 2px
 }
 
-.page-buttons button {
+.page-buttons-container button {
     padding: 10px;
     background: linear-gradient( yellow, orange);
     border: none;
@@ -495,7 +495,7 @@ input[type=text]:focus {
     li {
         font-size: 12.5px;
     }
-    .page-buttons {
+    .page-buttons-container {
         position: fixed;
         top: 83vh;
     }
