@@ -120,9 +120,11 @@ let numberOfPages
 // Creating a temp variable inside the function to store the result so we can add it or stop the loop
 // If the result length is greater than 0, we want to add the temporary variable to the "main" array
 async function searchResult() {
-
     const userInput = document.querySelector("input").value.toLowerCase()
     let page = 1
+
+    // Empty the array when searching again
+    searchBeerResult = []
 
     while (page != 0) {
         let auxSearchResult = await getBeerDataOnSearch(userInput, page)
@@ -134,7 +136,6 @@ async function searchResult() {
             page = 0
         }
     }
-
     // Calculating the number of pages necessary based on the result
     numberOfPages = Math.ceil(searchBeerResult.length / 10)
     document.querySelector(".total-page").innerHTML = numberOfPages
