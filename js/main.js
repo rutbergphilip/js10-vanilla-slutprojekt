@@ -20,8 +20,11 @@ function fetchBeerInfo() {
     getRandomBeerData().then(beers => {
         randomBeer = beers[0]
 
-        // Display the fetched random beer on page load
-        document.querySelector(".image-bord").src = randomBeer.image_url
+        if (randomBeer.image_url != null || randomBeer.image_url != undefined) {
+            document.querySelector(".image-bord").src = randomBeer.image_url
+        } else {
+            document.querySelector(".image-bord").src = "./img/beerimg.png"
+        }
         document.querySelector("h2").innerText = randomBeer.name
 
         buildModalBeerData(randomBeer)
@@ -347,5 +350,9 @@ function buildModalBeerData(selectedBeer) {
     document.querySelector(".modal-body").appendChild(document.createElement("div")).innerHTML = "<br><h4>Brewers tips</h4>"
     document.querySelector(".modal-body").appendChild(document.createElement("p")).innerText = selectedBeer.brewers_tips
 
-    document.querySelector(".modal-image").src = selectedBeer.image_url
+    if (selectedBeer.image_url != null || selectedBeer.image_url != undefined) {
+        document.querySelector(".modal-image").src = selectedBeer.image_url
+    } else {
+        document.querySelector(".modal-image").src = "./img/beerimg.png"
+    }
 }
